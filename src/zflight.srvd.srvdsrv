@@ -1,0 +1,5 @@
+@EndUserText.label: 'Flight Service'
+define service Zflight {
+  expose Z_connection;
+  expose Z_flight_r;
+}
