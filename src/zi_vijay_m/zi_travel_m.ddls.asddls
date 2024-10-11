@@ -7,12 +7,13 @@
     sizeCategory: #S,
     dataClass: #MIXED
 }
-define view entity ZI_TRAVEL_M
+define root view entity ZI_TRAVEL_M
   as select from ztravel_m
+  composition [0..*] of ZI_BOOKING_M as _booking
   association [0..1] to /DMO/I_Agency as _Agency on $projection.AgencyId = _Agency.AgencyID
   association [0..1] to /DMO/I_Customer as _Customer on $projection.CustomerId = _Customer.CustomerID
   association [1..1] to I_Currency as _Currency on $projection.CurrencyCode = _Currency.Currency
-  association [0..1] to /DMO/I_Overall_Status_VH as _status 
+  association [1..1] to /DMO/I_Overall_Status_VH as _status 
   on $projection.OverallStatus = _status.OverallStatus
 {
   key travel_id       as TravelId,
@@ -30,7 +31,9 @@ define view entity ZI_TRAVEL_M
       created_by      as CreatedBy,
       created_at      as CreatedAt,
       last_changed_by as LastChangedBy,
+      @Semantics.systemDateTime.localInstanceLastChangedAt: true
       last_changed_at as LastChangedAt,
+      _booking,
       _Agency,
       _Customer,
       _Currency,

@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Defination Managed'
+define service ZSR_TRAVEL_M {
+  expose ZC_TRAVEL_M;
+  expose ZC_BOOKING_M;
+  expose ZC_BOOKINGSUPPL_M;
+}
